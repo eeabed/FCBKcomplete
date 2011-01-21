@@ -85,9 +85,9 @@ jQuery(function($) {
             function createFCBK() {
                 element.hide();
                 element.attr("multiple", "multiple");
-                if (element.attr("name").indexOf("[]") == -1) {
+                /* if (element.attr("name").indexOf("[]") == -1) {
                     element.attr("name", element.attr("name") + "[]");
-                }
+                }*/
 
                 holder = $(document.createElement("ul"));
                 holder.attr("class", "holder");
@@ -160,27 +160,23 @@ jQuery(function($) {
                 if (!maxItems()) {
                     return false;
                 }
-                var li = document.createElement("li");
-                var txt = document.createTextNode(title);
-                var aclose = document.createElement("a");
                 var liclass = "bit-box" + (locked ? " locked": "");
-                $(li).attr({
-                    "class": liclass,
-                    "rel": value
+                var li = $('<li />', {
+                    'class': liclass,
+                    rel: value,
+                    text: title
                 });
-                $(li).prepend(txt);
-                $(aclose).attr({
-                    "class": "closebutton",
-                    "href": "#"
-                });
-
-                li.appendChild(aclose);
-                holder.append(li);
-
-                $(aclose).click(function() {
-                    removeItem($(this).parent("li"));
-                    return false;
-                });
+                if (options.with_icons) {
+                    li.prepend( $('<span />', {'class': value}));
+                }
+                li.append( $('<a />', {
+                    'class': 'closebutton',
+                    href: '#',
+                    click: function() {
+                        removeItem($(this).parent("li"));
+                        return false;
+                    }})
+                ).appendTo(holder);
 
                 if (!preadded) {
                     $("#" + elemid + "_annoninput").remove();
@@ -390,7 +386,11 @@ jQuery(function($) {
                         //nothing here...
                         }
                     else{
-                        content += '<li rel="' + object.value + '">' + itemIllumination(object.key, etext) + '</li>';
+                        var icon = ''
+                        if (options.with_icons) {
+                            icon = '<span class="' + object.value + '"></span> '
+                        }
+                        content += '<li rel="' + object.value + '">' + icon + itemIllumination(object.key, etext) + '</li>';
                         counter++;
                         maximum--;
                     }
@@ -619,7 +619,8 @@ jQuery(function($) {
                 onselect: null,
                 onremove: null,
                 attachto: null,
-                delay: 350
+                delay: 350,
+                with_icons: false
             },
             opt);
 
