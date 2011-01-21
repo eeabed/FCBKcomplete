@@ -112,6 +112,8 @@ jQuery(function($) {
                 
                 feed = $(document.createElement("ul"));
                 feed.attr("id", elemid + "_feed");
+                if (options.with_icons)
+                    feed.addClass('with-icons');
 
                 complete.prepend(feed);
                 holder.after(complete);
