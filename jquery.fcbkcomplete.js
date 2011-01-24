@@ -1,12 +1,12 @@
 /**
  FCBKcomplete 2.7.5
  - Jquery version required: 1.2.x, 1.3.x, 1.4.x
- 
+
  Based on TextboxList by Guillermo Rauch http://devthought.com/
- 
+
  Changelog:
  - 2.00 new version of fcbkcomplete
- 
+
  - 2.01 fixed bugs & added features
     fixed filter bug for preadded items
     focus on the input after selecting tag
@@ -14,17 +14,17 @@
     input tag in the control has a border in IE7
     added iterate over each match and apply the plugin separately
     set focus on the input after selecting tag
- 
+
  - 2.02 fixed fist element selected bug
     fixed defaultfilter error bug
- 
+
  - 2.5  removed selected="selected" attribute due ie bug
     element search algorithm changed
     better performance fix added
     fixed many small bugs
     onselect event added
     onremove event added
- 
+
  - 2.6  ie6/7 support fix added
     added new public method addItem due request
     added new options "firstselected" that you can set true/false to select first element on dropdown list
@@ -32,7 +32,7 @@
     removeItem bug fixed
     and many more bug fixed
     fixed public method to use it $("elem").trigger("addItem",[{"title": "test", "value": "test"}]);
-    
+
 - 2.7   jquery 1.4 compability
     item lock possability added by adding locked class to preadded option <option value="value" class="selected locked">text</option>
     maximum item that can be added
@@ -42,13 +42,13 @@
 
 - 2.7.2 some minor bug fixed
     minified version recompacted due some problems
-    
+
 - 2.7.3 event call fixed thanks to William Parry <williamparry!at!gmail.com>
 
 - 2.7.4 standart event change call added on addItem, removeItem
     preSet also check if item have "selected" attribute
     addItem minor fix
-    
+
 - 2.7.5  event call removeItem fixed
          new public method destroy added needed to remove fcbkcomplete element from dome
 
@@ -91,7 +91,7 @@ jQuery(function($) {
 
                 holder = $(document.createElement("ul"));
                 holder.attr("class", "holder");
-                
+
                 if (options.attachto) {
                   if (typeof(options.attachto) == "object") {
                     options.attachto.append(holder);
@@ -99,7 +99,7 @@ jQuery(function($) {
                   else {
                     $(options.attachto).append(holder);
                   }
-                  
+
                 }
                 else {
                   element.after(holder);
@@ -109,7 +109,7 @@ jQuery(function($) {
                 complete.addClass("facebook-auto");
                 complete.append('<div class="default">' + options.complete_text + "</div>");
                 complete.hover(function() {options.complete_hover = 0;}, function() {options.complete_hover = 1;});
-                
+
                 feed = $(document.createElement("ul"));
                 feed.attr("id", elemid + "_feed");
                 if (options.with_icons)
@@ -122,7 +122,7 @@ jQuery(function($) {
 
             function preSet() {
                 element.children("option").each(function(i, option) {
-                    option = $(option);                    
+                    option = $(option);
                     if (option.hasClass("selected")) {
                         addItem(option.text(), option.val(), true, option.hasClass("locked"));
                         option.attr("selected", "selected");
@@ -149,7 +149,7 @@ jQuery(function($) {
                     removeItem(item);
                 }
             });
-            
+
             //public method to remove item
             $(this).bind("destroy",
             function(event, data) {
@@ -211,7 +211,7 @@ jQuery(function($) {
 
             function removeItem(item) {
 
-                if (!item.hasClass('locked')) {                    
+                if (!item.hasClass('locked')) {
                     item.fadeOut("fast");
                     if (options.onremove) {
                         var _item = element.children("option[value=" + item.attr("rel") + "]");
@@ -251,7 +251,7 @@ jQuery(function($) {
                     else {
                       input.focus();
                     }
-                });              
+                });
 
                 holder.click(function() {
                     input.focus();
@@ -268,7 +268,7 @@ jQuery(function($) {
                     if (event.keyCode == 13) {
                         return false;
                     }
-                    //auto expand input             
+                    //auto expand input
                     input.attr("size", input.val().length + 1);
                 });
 
@@ -496,7 +496,7 @@ jQuery(function($) {
                             focuson = null;
                             return false;
                         }
-                        
+
                         if (options.addontab) {
                           focuson = feed.children("li:visible:first");
                           var option = focuson;
@@ -505,7 +505,7 @@ jQuery(function($) {
                           event.preventDefault();
                           focuson = null;
                           return false;
-                        }                        
+                        }
                     }
 
                     if (event.keyCode == 40) {
