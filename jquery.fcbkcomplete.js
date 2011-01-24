@@ -193,7 +193,7 @@ jQuery(function($) {
                         }
                     }
                     else{
-                        var _item = $(document.createElement("option"));
+                        _item = $(document.createElement("option"));
                         _item.attr("value", value).get(0).setAttribute("selected", "selected");
                         _item.attr("value", value).attr("selected", "selected");
                         _item.attr("value", value).addClass("selected");
@@ -201,7 +201,7 @@ jQuery(function($) {
                         element.append(_item);
                     }
                     if (options.onselect) {
-                        funCall(options.onselect, _item)
+                        funCall(options.onselect, _item);
                     }
                     element.change();
                 }
@@ -215,7 +215,7 @@ jQuery(function($) {
                     item.fadeOut("fast");
                     if (options.onremove) {
                         var _item = element.children("option[value=" + item.attr("rel") + "]");
-                        funCall(options.onremove, _item)
+                        funCall(options.onremove, _item);
                     }
                     element.children('option[value="' + item.attr("rel") + '"]').removeAttr("selected").removeClass("selected");
                     item.remove();
@@ -388,9 +388,9 @@ jQuery(function($) {
                         //nothing here...
                         }
                     else{
-                        var icon = ''
+                        var icon = '';
                         if (options.with_icons) {
-                            icon = '<span class="' + object.value + '"></span> '
+                            icon = '<span class="' + object.value + '"></span> ';
                         }
                         content += '<li rel="' + object.value + '">' + icon + itemIllumination(object.key, etext) + '</li>';
                         counter++;
@@ -579,7 +579,7 @@ jQuery(function($) {
 
             function funCall(func, item) {
                 var _object = "";
-                for (i = 0; i < item.get(0).attributes.length; i++) {
+                for (var i = 0; i < item.get(0).attributes.length; i++) {
                     if (item.get(0).attributes[i].nodeValue != null) {
                         _object += "\"_" + item.get(0).attributes[i].nodeName + "\": \"" + item.get(0).attributes[i].nodeValue + "\",";
                     }
